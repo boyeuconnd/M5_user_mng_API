@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "user-manager-api"
+    }
+  },
+  "defaultProject": "user-manager-api",
+  "cli": {
+    "analytics": false
+  }
 }
