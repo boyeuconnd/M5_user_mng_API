@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserApiService} from '../service/userapi.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {IUser} from '../model/iuser';
+import {error} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-user-edit',
@@ -17,11 +18,11 @@ export class UserEditComponent implements OnInit {
 
   constructor(private userService: UserApiService,
               private activatedRoute: ActivatedRoute,
-              private fb:FormBuilder) {
+              private fb:FormBuilder,
+              private route:Router) {
     this.editUserId = this.activatedRoute.snapshot.paramMap.get('id');
     this.userService.getUserById(+this.editUserId).subscribe(data=>{this.editUser = data},
       error => {alert("Error when get edit user")})
-    // console.log(this.editUserId);
   }
 
   ngOnInit(): void {
@@ -35,10 +36,22 @@ export class UserEditComponent implements OnInit {
   }
 
   findUserById(){
-    this.userService.getUserById(+this.editUserId).subscribe((data:IUser)=>{this.editUserForm.patchValue(data)})
-  }
-
-  editUserById() {
+    this.userService.getUserById(+this.editUserId).subscribe((data:IUser)=>{
+      this.editUserForm.patchValue(data)});
 
   }
+
+  update() {
+    let bodyData:IUser = this.editUserForm.value;
+    this.userService.updateUserById(+this.editUserId,bodyData).subscribe((data:IUser)=>{console.log(data)})
+    this.route.navigate(['user']);
+
+  }
+
+  // get name(){
+  //   return this.editUserForm.get('name')
+  // }
+  // get email(){
+  //   return this.editUserForm.get('email');
+  // }
 }

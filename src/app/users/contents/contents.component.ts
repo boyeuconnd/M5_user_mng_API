@@ -20,7 +20,6 @@ export class ContentsComponent implements OnInit {
   getAll(): IUser[] {
     this.userService.getUserList().subscribe((data:any)=>{
       this.userList = data;
-      console.log(data);
       console.log(this.userList);
     });
     return this.userList;

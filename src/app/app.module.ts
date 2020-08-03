@@ -9,13 +9,15 @@ import {AppRoutingModule} from './app-routing.module';
 import { ContentsComponent } from './users/contents/contents.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { UserAddComponent } from './users/user-add/user-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     ContentsComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserAddComponent
   ],
   imports: [
     BrowserModule,
