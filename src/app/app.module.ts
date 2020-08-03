@@ -4,15 +4,25 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ListComponent } from './users/list/list.component';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import { ContentsComponent } from './users/contents/contents.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    ListComponent,
+    ContentsComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {UserApiService} from '../service/userapi.service';
 import {IUser} from '../model/iuser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -10,17 +11,26 @@ import {IUser} from '../model/iuser';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private userService: UserApiService) { }
-
-  userList :IUser[];
-
-  ngOnInit(): void {
-    this.userService.getUserList().subscribe((data:any)=>{
-      this.userList = data;
-      console.log(this.userList)
-    });
+  constructor(private route: Router) {
 
   }
 
+  @Input()
+  userList :IUser[];
+
+  @Output()
+  deleteUserId = new EventEmitter<number>();
+
+  @Output()
+  editUserId = new EventEmitter<number>();
+
+  ngOnInit(): void {
+  }
+
+
+  delete(id:number){
+    this.deleteUserId.emit(id);
+
+  }
 
 }
