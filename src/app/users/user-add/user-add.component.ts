@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupApiService} from '../service/groupapi.service';
 import {IGroup} from '../model/igroup';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IUser} from '../model/iuser';
 import {UserApiService} from '../service/userapi.service';
 import {error} from '@angular/compiler/src/util';
@@ -26,8 +26,8 @@ export class UserAddComponent implements OnInit {
       console.log(this.groups);
     })
     this.newUserForm = this.fb.group({
-      name:[''],
-      email:[''],
+      name:[null,Validators.required,Validators.minLength(4)],
+      email:[null,Validators.required,Validators.email],
       groups:[3]
     })
   }
@@ -48,4 +48,11 @@ export class UserAddComponent implements OnInit {
       }
     }
   }
+
+  // get name(){
+  //   return this.newUserForm.get('name');
+  // }
+  // get email(){
+  //   return this.newUserForm.get('email');
+  // }
 }
